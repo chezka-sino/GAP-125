@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Sino_2"
+    "\\Sino_2",
+    "\\Sino_3",
+    "\\Sino_3\\Sino_3",
+    "\\Sino_4",
+    "\\Sino_4\\Sino_4"
   ],
-  "SelectedNode": "\\Sino_2",
+  "SelectedNode": "\\Sino_4\\Sino_4\\vending_machine.cpp",
   "PreviewInSolutionExplorer": false
 }
