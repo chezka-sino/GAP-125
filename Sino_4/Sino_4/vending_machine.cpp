@@ -8,24 +8,64 @@
 #include <time.h>
 using namespace std;
 
-float price(int category, int item)
+/*
+	Prints the exit function with the price of the chosen item or 0 if exit is chosen
+*/
+void print_price(double price)
 {
-	// TODO returns price
-	if (category == 1)
-	{
-		if (item == 1)
-		{
-			return 3.50;
-		}
-		else if (item == 2)
-		{
-			return 3.50;
-		}
-	}
-
-	return 0;
+	cout << "Thank you! Your total is $" << price;
 }
 
+/*
+	Contains prices of the items and passes price to print_price to print price
+*/
+void price(int category, int item)
+{
+	if (category == 1)
+	{
+		if (item == 1 || item == 2 || item == 3)
+		{
+			print_price(3.50);
+		}
+		else if (item == 4)
+		{
+			print_price(1.99);
+		}
+		else if (item == 5)
+		{
+			print_price(0.99);
+		}
+	}
+	else if (category == 2)
+	{
+		if (item == 1 || item == 3 || item == 5)
+		{
+			print_price(1.99);
+		}
+		else if (item == 2 || item == 4)
+		{
+			print_price(3.99);
+		}
+	}
+	else if (category == 3)
+	{
+		if (item == 1 || item == 2 || item == 4 || item == 5)
+		{
+			print_price(0.99);
+		}
+		else if (item == 3)
+			print_price(1.99);
+	}
+	else if (category == 4)
+	{
+		print_price(0.99);
+	}
+
+}
+
+/*
+	Prints the menu for each category and passes category to price to get item price
+*/
 void menu(int category)
 {
 	int item;
@@ -39,6 +79,7 @@ void menu(int category)
 		cout << "4. Bottled Water \t $1.99\n";
 		cout << "5. Fountain Drink \t $0.99\n";
 		cout << "Choose a drink: ";
+
 	}
 
 	else if (category == 2)
@@ -48,7 +89,7 @@ void menu(int category)
 		cout << "2. Strawberry Cheesecake \t $3.99\n";
 		cout << "3. Butter Croissant \t\t $1.99\n";
 		cout << "4. Red Velvet Cupcake \t\t $3.99\n";
-		cout << "5. Blueberry Scone \t\t $2.99\n";
+		cout << "5. Blueberry Scone \t\t $1.99\n";
 		cout << "Choose one: ";
 	}
 
@@ -75,14 +116,9 @@ void menu(int category)
 	}
 
 	cin >> item;
+	cout << "\n";
 	price(category,item);
 
-}
-
-void exit(float price)
-{
-	// TODO prints exit and price
-	cout << "Thank you! Your total is $" << price;
 }
 
 void main()
@@ -102,7 +138,7 @@ void main()
 
 	if (choice == 5)
 	{
-		exit(0);
+		print_price(0);
 	}
 
 	else
