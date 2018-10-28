@@ -6,6 +6,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include <conio.h>
 using namespace std;
 
 const int k_MazeWidth = 42;
@@ -79,7 +80,7 @@ void PrintIns()
 {
 	cout << "Welcome to the Maze!\n\n";
 	cout << "The goal is to make it to the exit point\n";
-	cout << "Controls: Enter 'up', 'down', 'left' or 'right' to navigate.\n\n";
+	cout << "Controls: w - up; a - left; s - down; d - right\n\n";
 }
 
 bool CheckUp(int y, int x)
@@ -146,6 +147,12 @@ void MoveRight()
 	playerX = playerX+2;
 }
 
+void EndGame()
+{
+	cout << "Congratulations!\n";
+	cout << "You finished the maze after " << stepCount << " steps.";
+}
+
 void main()
 {
 	// Initialize starting and end point
@@ -155,67 +162,59 @@ void main()
 	PrintIns();
 	PrintMaze(maze);
 
-	string move;
+	char move = 0;
 
 	while (playerX != finX && playerY != finY)
 	{
 		maze[playerY][playerX] = ' ';
 		cout << "Move: ";
-		cin >> move;
+		move = _getch();
 		cout << "\n";
 
-		if (move == "up")
+		switch (move)
 		{
-			if (CheckUp(playerY, playerX))
-			{
-				MoveUp();
-			}
-			else
-			{
-				cout << "Unable to move up\n";
-			}
+			case 'w':
+				if (CheckUp(playerY, playerX))
+				{
+					MoveUp();
+				}
+				else
+				{
+					cout << "Unable to move up\n";
+				}
+				break;
+			case 's':
+				if (CheckDown(playerY, playerX))
+				{
+					MoveDown();
+				}
+				else
+				{
+					cout << "Unable to move down\n";
+				}
+				break;
+			case 'a':
+				if (CheckLeft(playerY, playerX))
+				{
+					MoveLeft();
+				}
+				else
+				{
+					cout << "Unable to move to the left\n";
+				}
+				break;
+			case 'd':
+				if (CheckRight(playerY, playerX))
+				{
+					MoveRight();
+				}
+				else
+				{
+					cout << "Unable to move to the right\n";
+				}
 		}
-
-		else if (move == "down")
-		{
-			if (CheckDown(playerY, playerX))
-			{
-				MoveDown();
-			}
-			else
-			{
-				cout << "Unable to move down\n";
-			}
-		}
-
-		else if (move == "left")
-		{
-			if (CheckLeft(playerY, playerX))
-			{
-				MoveLeft();
-			}
-			else
-			{
-				cout << "Unable to move to the left\n";
-			}
-		}
-
-		else if (move == "right")
-		{
-			if (CheckRight(playerY, playerX))
-			{
-				MoveRight();
-			}
-			else
-			{
-				cout << "Unable to move to the right\n";
-			}
-		}
-
 		maze[playerY][playerX] = '@';
 		PrintMaze(maze);
-		//play the game
-
 	}
-
+	EndGame();
 }
